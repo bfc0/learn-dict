@@ -1,0 +1,17 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./test.db"
+}
+
+model Word {
+  id          Int    @id @default(autoincrement())
+  word        String @unique(map: "sqlite_autoindex_words_1")
+  translation String
+  usage       String
+
+  @@map("words")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
