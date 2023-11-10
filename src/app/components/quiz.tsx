@@ -45,8 +45,7 @@ export default function Quiz(props: { words: Word[] }) {
     }
 
     function clickAnswer(answer: string) {
-        setClickedItems([...clickedItems, answer])
-
+        setClickedItems(prevClickedItems => [...prevClickedItems, answer])
         if (answer == quizItem?.correct) {
             setTimeout(() => {
                 setQuizItem(generateItemFrom(words))
@@ -63,6 +62,7 @@ export default function Quiz(props: { words: Word[] }) {
                 if (!quizItem) { return }
                 clickAnswer(quizItem.answers[parseInt(e.key) - 1])
             }
+            // console.log(clickedItems)
         }
         window.addEventListener("keydown", keyPress)
         return () => window.removeEventListener("keydown", keyPress)
